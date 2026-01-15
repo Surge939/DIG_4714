@@ -4,6 +4,7 @@ using this read me file as an example
 
 The secondary branch will be created with the addition
 of these 2 lines
+This line is part of the weird branch in the middle of the graph
 
 I hope merging it works
 
