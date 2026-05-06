@@ -15,11 +15,18 @@ public class resourceManager : MonoBehaviour
     bool hasCheeseUpgrade;
     bool hasRubbleUpgrade;
 
-    Dictionary<string, float> currency = new Dictionary<string, float>()
+    public enum ResourceType
     {
-        {"Cheese Bits", 0 },
-        {"Rubble", 0 },
-        {"Science", 0 }
+        CheeseBits,
+        Rubble,
+        Science,
+    }
+
+    Dictionary<ResourceType, float> currency = new Dictionary<ResourceType, float>()
+    {
+        {ResourceType.CheeseBits, 0 },
+        {ResourceType.Rubble, 0 },
+        {ResourceType.Science, 0 }
 
     };
 
@@ -27,16 +34,16 @@ public class resourceManager : MonoBehaviour
 
     public void AddCheese()
     {
-        currency["Cheese Bits"]++;
+        currency[ResourceType.CheeseBits]++;
 
-        cheeseText.SetText("Cheese Bits: {0}", currency["Cheese Bits"]);
+        cheeseText.SetText("Cheese Bits: {0}", currency[ResourceType.CheeseBits]);
     }
 
     public void AutoCheese()
     {
-        if(!hasCheeseUpgrade && currency["Cheese Bits"] >=minCheeseClicks_1)
+        if(!hasCheeseUpgrade && currency[ResourceType.CheeseBits] >=minCheeseClicks_1)
         {
-            currency["Cheese Bits"] -= minCheeseClicks_1;
+            currency[ResourceType.CheeseBits] -= minCheeseClicks_1;
             hasCheeseUpgrade = true;
         }
     }
@@ -50,9 +57,9 @@ public class resourceManager : MonoBehaviour
 
     public void AutoRubble()
     {
-        if (!hasRubbleUpgrade && currency["Cheese Bits"] >= minCheeseClicks_2)
+        if (!hasRubbleUpgrade && currency[ResourceType.CheeseBits] >= minCheeseClicks_2)
         {
-            currency["Cheese Bits"] -= minCheeseClicks_2;
+            currency[ResourceType.CheeseBits] -= minCheeseClicks_2;
             hasRubbleUpgrade = true;
         }
     }
@@ -69,16 +76,16 @@ public class resourceManager : MonoBehaviour
     {
         if(hasCheeseUpgrade)
         {
-            currency["Cheese Bits"] += clicksPerSec * Time.deltaTime;
+            currency[ResourceType.CheeseBits] += clicksPerSec * Time.deltaTime;
 
-            cheeseText.SetText("Cheese Bits: {0:0}", currency["Cheese Bits"]);
+            cheeseText.SetText("Cheese Bits: {0:0}", currency[ResourceType.CheeseBits]);
         }
 
         if (hasRubbleUpgrade)
         {
-            currency["Rubble"] += clicksPerSec * Time.deltaTime;
+            currency[ResourceType.Rubble] += clicksPerSec * Time.deltaTime;
 
-            RubbleText.SetText("Rubble: {0:0}", currency["Rubble"]);
+            RubbleText.SetText("Rubble: {0:0}", currency[ResourceType.Rubble]);
         }
     }
 
